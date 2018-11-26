@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="452.0" prefWidth="236.0">
+         <children>
+            <Pane prefHeight="53.0" prefWidth="210.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="16.0" nodeOrientation="LEFT_TO_RIGHT" text="Nick">
+                     <opaqueInsets>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                  </Label>
+               </children>
+            </Pane>
+            <FlowPane prefHeight="387.0" prefWidth="210.0">
+               <children>
+                  <TreeView prefHeight="374.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </opaqueInsets>
+                  </TreeView>
+               </children>
+            </FlowPane>
+            <VBox maxWidth="200.0" prefHeight="81.0" prefWidth="202.0">
+               <children>
+                  <Button minWidth="110.0" mnemonicParsing="false" text="+Создать проект">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button minWidth="110.0" mnemonicParsing="false" text="+Создать задачу">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="1.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="452.0" prefWidth="434.0">
+         <children>
+            <TableView prefHeight="418.0" prefWidth="381.0">
+              <columns>
+                <TableColumn prefWidth="22.0" text="#" />
+                <TableColumn prefWidth="99.0" text="Задача" />
+                  <TableColumn prefWidth="68.0" text="Дедлайн" />
+                  <TableColumn prefWidth="116.0" text="Дней до дедлайна" />
+                  <TableColumn prefWidth="69.0" text="Статус" />
+              </columns>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TableView>
+            <Button mnemonicParsing="false" text="+Добавить задачу">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <VBox minWidth="0.0" prefWidth="220.0">
+         <children>
+            <DatePicker promptText="Задать делайн">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </DatePicker>
+            <Button minWidth="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="+Добавить напоминание">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <ListView minHeight="0.0" prefHeight="20.0" prefWidth="165.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </ListView>
+            <TextArea prefHeight="200.0" prefWidth="200.0" text="Описание задачи">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </TextArea>
+            <Button minWidth="165.0" mnemonicParsing="false" text="+Добавить подзадачу">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Button>
+            <ListView editable="true" prefHeight="124.0" prefWidth="200.0">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></ListView>
+         </children>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <HBox.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </HBox.margin></VBox>
+   </children>
+</HBox>
