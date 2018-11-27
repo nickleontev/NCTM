@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -8,50 +9,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox prefHeight="452.0" prefWidth="236.0">
+
+<SplitPane dividerPositions="0.5, 0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <AnchorPane minWidth="65.0" prefHeight="400.0" prefWidth="200.0">
          <children>
-            <Pane prefHeight="53.0" prefWidth="210.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="14.0" layoutY="16.0" nodeOrientation="LEFT_TO_RIGHT" text="Nick">
-                     <opaqueInsets>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </opaqueInsets>
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                  </Label>
-               </children>
-            </Pane>
-            <FlowPane prefHeight="387.0" prefWidth="210.0">
-               <children>
-                  <TreeView prefHeight="374.0" prefWidth="200.0">
-                     <opaqueInsets>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </opaqueInsets>
-                  </TreeView>
-               </children>
-            </FlowPane>
-            <VBox maxWidth="200.0" prefHeight="81.0" prefWidth="202.0">
-               <children>
-                  <Button minWidth="110.0" mnemonicParsing="false" text="+Создать проект">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button minWidth="110.0" mnemonicParsing="false" text="+Создать задачу">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="1.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
+            <Button layoutX="22.0" layoutY="508.0" minWidth="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="+Создать задачу" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0">
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </Button>
+            <TreeView layoutX="14.0" layoutY="21.0" minWidth="25.0" prefHeight="422.0" prefWidth="291.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+            </TreeView>
+            <Button layoutX="20.0" layoutY="2.0" mnemonicParsing="false" text="≡" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
+            <Button layoutX="19.0" layoutY="426.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="200.0" text="+Создать проект" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
+            <SplitMenuButton layoutX="51.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Nick" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </SplitMenuButton>
          </children>
-      </VBox>
-      <VBox prefHeight="452.0" prefWidth="434.0">
+      </AnchorPane>
+      <AnchorPane minWidth="400.0" prefHeight="452.0" prefWidth="691.0">
          <children>
-            <TableView prefHeight="418.0" prefWidth="381.0">
+            <TableView layoutX="20.0" layoutY="38.0" prefHeight="421.0" prefWidth="376.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
               <columns>
                 <TableColumn prefWidth="22.0" text="#" />
                 <TableColumn prefWidth="99.0" text="Задача" />
@@ -59,75 +44,67 @@
                   <TableColumn prefWidth="116.0" text="Дней до дедлайна" />
                   <TableColumn prefWidth="69.0" text="Статус" />
               </columns>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
-            <Button mnemonicParsing="false" text="+Добавить задачу">
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
+            <Button layoutX="20.0" layoutY="477.0" mnemonicParsing="false" text="+Добавить задачу" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
+            <Label layoutX="20.0" layoutY="6.0" text="Название проекта" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
          </children>
-      </VBox>
-      <VBox minWidth="0.0" prefWidth="220.0">
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <DatePicker promptText="Задать делайн">
+            <DatePicker layoutX="21.0" layoutY="36.0" prefHeight="27.0" prefWidth="145.0" promptText="Назначить делайн" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="35.0">
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
             </DatePicker>
-            <Button minWidth="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="171.0" text="+Добавить напоминание">
+            <Button layoutX="10.0" layoutY="228.0" minWidth="155.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="154.0" text="+Добавить напоминание" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="230.0">
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
-            </Button>
-            <ListView minHeight="0.0" prefHeight="20.0" prefWidth="165.0">
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
+            </Button>
+            <ListView editable="true" layoutX="55.0" layoutY="364.0" prefHeight="109.0" prefWidth="322.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="300.0">
+               <opaqueInsets>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
             </ListView>
-            <TextArea prefHeight="200.0" prefWidth="200.0" text="Описание задачи">
+            <TextArea layoutX="4.0" layoutY="70.0" prefHeight="150.0" prefWidth="365.0" text="Описание задачи" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0">
                <opaqueInsets>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
             </TextArea>
-            <Button minWidth="165.0" mnemonicParsing="false" text="+Добавить подзадачу">
+            <Button layoutX="23.0" layoutY="271.0" minWidth="155.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="155.0" text="+Добавить подзадачу" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="265.0">
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin>
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding>
             </Button>
-            <ListView editable="true" prefHeight="124.0" prefWidth="200.0">
-               <opaqueInsets>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </VBox.margin></ListView>
+            <Text layoutX="33.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Название задачи" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+            <Button layoutX="11.0" layoutY="498.0" mnemonicParsing="false" text="&gt;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+            <Button layoutX="23.0" layoutY="229.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="154.0" text="Открыть список напоминаний" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="10.0">
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </Button>
          </children>
-         <opaqueInsets>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </opaqueInsets>
-         <HBox.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </HBox.margin></VBox>
-   </children>
-</HBox>
+      </AnchorPane>
+   </items>
+</SplitPane>
