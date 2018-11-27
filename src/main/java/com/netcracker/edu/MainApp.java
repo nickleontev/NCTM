@@ -27,10 +27,13 @@ public class MainApp extends Application {
 
         log.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode, 400, 200);
-       // scene.getStylesheets().add("/styles/styles.css");
+        // scene.getStylesheets().add("/styles/styles.css");
 
         stage.setTitle("Hello JavaFX and Maven");
         stage.setScene(scene);
+        stage.setMinHeight(500);
+        stage.setMinWidth(500);
+        stage.setMaximized(true);
         stage.show();
     }
 }

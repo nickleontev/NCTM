@@ -10,7 +10,7 @@
         </layout>
     </appender>
 
-    <logger name="com.netcracker.edu">
+    <logger name="com.edu">
         <level value="DEBUG"/>
     </logger>
 
