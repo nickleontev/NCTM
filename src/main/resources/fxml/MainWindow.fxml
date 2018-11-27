@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 
 <SplitPane dividerPositions="0.5, 0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <items>
@@ -53,6 +48,7 @@
             </TableView>
             <Button layoutX="20.0" layoutY="477.0" mnemonicParsing="false" text="+Добавить задачу" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
             <Label layoutX="20.0" layoutY="6.0" text="Название проекта" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+            <DatePicker promptText="Дедлайн проекта" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
