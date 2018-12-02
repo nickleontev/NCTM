@@ -1,42 +1,35 @@
 package com.netcracker.edu.fxcontrollers;
 
+import com.netcracker.edu.dao.impl.runtime.Root;
+import com.netcracker.edu.fxmodel.Project;
+import com.netcracker.edu.util.RuntimeDataHolder;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TreeView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainWindowController
+public class MainWindowController implements Initializable
 {
     private static final Logger log = LoggerFactory.getLogger(MainWindowController.class);
+    private Root data = RuntimeDataHolder.getHolder();
 
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
-    @FXML private Label messageLabel;
+    @FXML
+    private TreeView <Project> project_treeView;
 
 
-
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        this.resourceBundle = resources;
-//        columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
-//        columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
-//        setupClearButtonField(txtSearch);
-//        initListeners();
-//        fillData();
-//        initLoader();
-//    }
 
 //
 //    private void initLoader() {
@@ -54,6 +47,8 @@ public class MainWindowController
 
     private Stage createProjectStage;
     private Stage createTaskStage;
+
+    private ObservableList<Project> backupList;
 
     private Stage mainStage;
     private Parent fxmlEdit;
@@ -113,32 +108,18 @@ public class MainWindowController
         createTaskStage.showAndWait(); // для ожидания закрытия окна
     }
 
-    public void sayHello() {
-
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
-
-        StringBuilder builder = new StringBuilder();
-
-        if (!StringUtils.isEmpty(firstName)) {
-            builder.append(firstName);
-        }
-
-        if (!StringUtils.isEmpty(lastName)) {
-            if (builder.length() > 0) {
-                builder.append(" ");
-            }
-            builder.append(lastName);
-        }
-
-        if (builder.length() > 0) {
-            String name = builder.toString();
-            log.debug("Saying hello to " + name);
-            messageLabel.setText("Hello " + name);
-        } else {
-            log.debug("Neither first name nor last name was set, saying hello to anonymous person");
-            messageLabel.setText("Hello mysterious person");
-        }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.resourceBundle = resources;
+        //columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
+        //columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
+        //setupClearButtonField(txtSearch);
+        //initListeners();
+        //fillData();
+        //initLoader();
     }
 
+    public void setMainStage(Stage mainStage) {
+        this.mainStage = mainStage;
+    }
 }
