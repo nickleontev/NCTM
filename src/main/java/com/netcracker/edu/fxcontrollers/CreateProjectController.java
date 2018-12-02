@@ -1,6 +1,6 @@
 package com.netcracker.edu.fxcontrollers;
 
-import com.netcracker.edu.dao.impl.runtime.Root;
+import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.util.RuntimeDataHolder;
 import javafx.event.ActionEvent;
@@ -9,15 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 
 import org.slf4j.Logger;
@@ -44,6 +40,10 @@ public class CreateProjectController implements Initializable
     private DatePicker deadline_DatePicker;
 
 
+    @FXML
+    private Label parent_Label;
+
+
 
     private Root projects;
 
@@ -54,7 +54,9 @@ public class CreateProjectController implements Initializable
     public void actionClose(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        stage.hide();
+        stage.close();
+
+
     }
 
 
@@ -63,9 +65,10 @@ public class CreateProjectController implements Initializable
             return;
         }
 
-        Project project = new Project(summary_TextField.getText(), description_TextField.getText(), deadline_DatePicker.getValue());
+        Project project = new Project(summary_TextField.getText(), description_TextField.getText(), deadline_DatePicker.getValue(),data.getCurrent());
 
         data.getCurrent().add(project);
+
 
         actionClose(actionEvent);
     }
@@ -81,7 +84,16 @@ public class CreateProjectController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.resourceBundle = resources;
+        parent_Label.setText(data.getCurrent().getSummary());
+
+    }
+
+    public  void update(){
+        parent_Label.setText(data.getCurrent().getSummary());
+        description_TextField.clear();
+        summary_TextField.clear();
     }
 
 }

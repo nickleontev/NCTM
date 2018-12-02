@@ -1,8 +1,9 @@
 package com.netcracker.edu.fxcontrollers;
 
-import com.netcracker.edu.dao.impl.runtime.Root;
+import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.util.RuntimeDataHolder;
+import com.netcracker.edu.util.Tree;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javafx.event.ActionEvent;
+
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +31,9 @@ public class MainWindowController implements Initializable
 
     @FXML
     private TreeView <Project> project_treeView;
+
+    private FXMLLoader fxmlLoader = new FXMLLoader();
+    private CreateProjectController createProjectController;
 
 
 
@@ -53,7 +59,6 @@ public class MainWindowController implements Initializable
     private Stage mainStage;
     private Parent fxmlEdit;
     private ResourceBundle resourceBundle;
-    private FXMLLoader fxmlLoader = new FXMLLoader();
 
     //private EditDialogController editDialogController;
 
@@ -66,13 +71,21 @@ public class MainWindowController implements Initializable
 
             try {
                 createProjectStage = new Stage();
+
+                fxmlLoader.setLocation(getClass().getResource("/fxml/CreateProjectForm.fxml"));
+               // fxmlLoader.setResources(ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.getCurrentLang().getLocale()));
+                fxmlEdit = fxmlLoader.load();
+                createProjectController = fxmlLoader.getController();
+
                 Parent root = FXMLLoader.load(getClass().getResource("/fxml/CreateProjectForm.fxml"));
                 // createProjectStage.setTitle(resourceBundle.getString("edit"));
                 createProjectStage.setTitle("Создать проект");
 //                createProjectStage.setMinHeight(150);
 //                createProjectStage.setMinWidth(300);
                 createProjectStage.setResizable(false);
-                createProjectStage.setScene(new Scene(root));
+                Scene scene = new Scene(fxmlEdit);
+                scene.getStylesheets().add("/styles/projectLabel.css");
+                createProjectStage.setScene(scene);
                 createProjectStage.initModality(Modality.WINDOW_MODAL);
                 createProjectStage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
             } catch (IOException e) {
@@ -81,10 +94,12 @@ public class MainWindowController implements Initializable
 
         }
 
+        createProjectController.update();
         createProjectStage.showAndWait(); // для ожидания закрытия окна
     }
 
     public void createTaskClick(ActionEvent actionEvent) {
+        doIt();
 
         if (createTaskStage == null) {
 
@@ -108,15 +123,22 @@ public class MainWindowController implements Initializable
         createTaskStage.showAndWait(); // для ожидания закрытия окна
     }
 
+    public void doIt() {
+        Tree tree = new Tree(project_treeView, data.getRoot().getProjectList(), data.getRoot());
+        //tree.getTreeView();
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         this.resourceBundle = resources;
-        //columnFIO.setCellValueFactory(new PropertyValueFactory<Person, String>("fio"));
-        //columnPhone.setCellValueFactory(new PropertyValueFactory<Person, String>("phone"));
-        //setupClearButtonField(txtSearch);
-        //initListeners();
-        //fillData();
-        //initLoader();
+        doIt();
+
+        //TreeItem<Project> rootItem = new TreeItem<Project>(data.getRoot());doIt();
+
+        //rootItem.setExpanded(true);
+
     }
 
     public void setMainStage(Stage mainStage) {

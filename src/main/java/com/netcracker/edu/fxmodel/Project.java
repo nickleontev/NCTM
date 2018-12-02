@@ -37,6 +37,7 @@ public class Project {
      * @param
      * @param
      */
+
     public Project(String summary, String description, LocalDate deadline) {
         this.summary = new SimpleStringProperty(summary);
         this.description = new SimpleStringProperty(description);
@@ -44,6 +45,17 @@ public class Project {
         this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
         this.projectList = FXCollections.observableArrayList();
+
+    }
+
+    public Project(String summary, String description, LocalDate deadline, Project parentProject) {
+        this.summary = new SimpleStringProperty(summary);
+        this.description = new SimpleStringProperty(description);
+        this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+        this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
+        this.projectList = FXCollections.observableArrayList();
+        this.parentProject = parentProject;
 
     }
     public String getSummary() {
@@ -147,4 +159,8 @@ public class Project {
         }
     }
 
+    @Override
+    public String toString() {
+        return summary.getValue();
+    }
 }

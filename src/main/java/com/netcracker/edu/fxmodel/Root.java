@@ -1,4 +1,4 @@
-package com.netcracker.edu.dao.impl.runtime;
+package com.netcracker.edu.fxmodel;
 
 import com.netcracker.edu.dao.interfaces.ProjectDAO;
 import com.netcracker.edu.fxmodel.Project;
@@ -12,9 +12,12 @@ public class Root {
     public Root() {
     }
 
-   private Project root = new Project("", "", LocalDate.MIN);
+   private Project root = new Project("Проекты", "", LocalDate.MIN);
    private Project current = root;
 
+    public Project getRoot() {
+        return root;
+    }
 
     public Project getCurrent() {
         return current;
