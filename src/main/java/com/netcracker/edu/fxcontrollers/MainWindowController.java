@@ -158,8 +158,6 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        data.getCurrent().addTask(new Task("хуй","уй",LocalDate.now()));
-
         this.resourceBundle = resources;
         task_TableColumn.setCellValueFactory(new PropertyValueFactory<Task,String>("summary"));
         deadline_TableColumn.setCellValueFactory(new PropertyValueFactory<Task,LocalDate>("deadline"));
