@@ -44,9 +44,6 @@ public class CreateProjectController implements Initializable
     private Label parent_Label;
 
 
-
-    private Root projects;
-
     private ResourceBundle resourceBundle;
 
 
@@ -67,7 +64,7 @@ public class CreateProjectController implements Initializable
 
         Project project = new Project(summary_TextField.getText(), description_TextField.getText(), deadline_DatePicker.getValue(),data.getCurrent());
 
-        data.getCurrent().add(project);
+        data.getCurrent().addSubProject(project);
 
 
         actionClose(actionEvent);

@@ -13,4 +13,19 @@
     -fx-text-fill: white;
 }
 
+.into_task_project-label {
+    /*-fx-font-size: 12px;*/
+    /*-fx-font-weight: bold;*/
+    /*-fx-text-fill: #333333;*/
+    /*-fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );*/
+    /*-fx-color-label-visible: #fff; !* Цвет текста *!*/
+    /*-fx-padding: 10 px; !* Поля вокруг текста *!*/
+    /*-fx-border-radius: 10 px; !* Уголки *!*/
+    /*-fx-background-radius: 10 px;*/
+    /*-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );*/
+
+    -fx-background-color:  #6495ed;
+    -fx-text-fill: white;
+}
+
 

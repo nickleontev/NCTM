@@ -1,6 +1,5 @@
 package com.netcracker.edu.fxmodel;
 
-import com.netcracker.edu.fxcontrollers.MainWindowController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,24 +11,22 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 
-public class Project {
+public class Task {
 
-    private static final Logger log = LoggerFactory.getLogger(Project.class);
+    private static final Logger log = LoggerFactory.getLogger(Task.class);
 
     private  StringProperty summary;
     private  StringProperty description;
     private  ObjectProperty<LocalDate> created;
     private  ObjectProperty<LocalDate> updated;
     private  ObjectProperty<LocalDate> deadline;
-    private ObservableList<Project> projectList;
-
-    private ObservableList<Task> taskList;
+    //private ObservableList<SubTask> subTasks;
     private Project parentProject;
 
     /**
      * Конструктор по умолчанию.
      */
-    public Project() {
+    public Task() {
 
     }
 
@@ -40,26 +37,21 @@ public class Project {
      * @param
      */
 
-    public Project(String summary, String description, LocalDate deadline) {
+    public Task(String summary, String description, LocalDate deadline) {
         this.summary = new SimpleStringProperty(summary);
         this.description = new SimpleStringProperty(description);
         this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
-        this.projectList = FXCollections.observableArrayList();
-        this.taskList = FXCollections.observableArrayList();
-
     }
 
-    public Project(String summary, String description, LocalDate deadline, Project parentProject) {
+    public Task(String summary, String description, LocalDate deadline, Project parentProject) {
         this.summary = new SimpleStringProperty(summary);
         this.description = new SimpleStringProperty(description);
         this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
-        this.projectList = FXCollections.observableArrayList();
         this.parentProject = parentProject;
-        this.taskList = FXCollections.observableArrayList();
 
     }
     public String getSummary() {
@@ -110,14 +102,6 @@ public class Project {
         this.deadline.set(deadline);
     }
 
-    public ObservableList<Project> getProjectList() {
-        return projectList;
-    }
-
-    public void setProjectList(ObservableList<Project> projectList) {
-        this.projectList = projectList;
-    }
-
     public String getDescription() {
         return description.get();
     }
@@ -138,60 +122,30 @@ public class Project {
         this.parentProject = parentProject;
     }
 
-    public ObservableList<Task> getTaskList() {
-        return taskList;
-    }
-
-    public boolean addSubProject(Project project) {
-
-        try {
-            project.setParentProject(this);
-            projectList.add(project);
-            return true;
-        }
-        catch (Exception ex) {
-            log.debug("Exception while adding the project");
-            return false;
-        }
-    }
-
-    public boolean removeSubProject (Project project) {
-
-        try {
-            projectList.remove(project);
-            return true;
-        }
-        catch (Exception ex) {
-            log.debug("Exception while removing the project");
-            return false;
-        }
-    }
-
-    public boolean addTask(Task task) {
-
-        try {
-            task.setParentProject(this);
-            taskList.add(task);
-            return true;
-        }
-        catch (Exception ex) {
-            log.debug("Exception while adding the project");
-            return false;
-        }
-    }
-
-    public boolean removeTask (Task task) {
-
-        try {
-            taskList.remove(task);
-            return true;
-        }
-        catch (Exception ex) {
-            log.debug("Exception while removing the project");
-            return false;
-        }
-    }
-
+//    public boolean add (SubTask subTask) {
+//
+//        try {
+//            subTasks.setParentProject(this);
+//            subTasks.add(project);
+//            return true;
+//        }
+//        catch (Exception ex) {
+//            log.debug("Exception while adding the project");
+//            return false;
+//        }
+//    }
+//
+//    public boolean remove (SubTask subTask) {
+//
+//        try {
+//            subTasks.remove(subTask);
+//            return true;
+//        }
+//        catch (Exception ex) {
+//            log.debug("Exception while removing the project");
+//            return false;
+//        }
+//    }
 
     @Override
     public String toString() {

@@ -32,13 +32,13 @@
       </AnchorPane>
       <AnchorPane minWidth="400.0" prefHeight="452.0" prefWidth="691.0">
          <children>
-            <TableView layoutX="20.0" layoutY="38.0" prefHeight="421.0" prefWidth="376.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
+            <TableView fx:id="tasks_TableView" layoutX="20.0" layoutY="38.0" prefHeight="421.0" prefWidth="376.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
               <columns>
                 <TableColumn prefWidth="22.0" text="#" />
-                <TableColumn prefWidth="99.0" text="Задача" />
-                  <TableColumn prefWidth="68.0" text="Дедлайн" />
-                  <TableColumn prefWidth="116.0" text="Дней до дедлайна" />
-                  <TableColumn prefWidth="69.0" text="Статус" />
+                <TableColumn fx:id="task_TableColumn" prefWidth="99.0" text="Задача" />
+                  <TableColumn fx:id="deadline_TableColumn" prefWidth="68.0" text="Дедлайн" />
+                  <TableColumn fx:id="days_TableColumn" prefWidth="116.0" text="Дней до дедлайна" />
+                  <TableColumn fx:id="status_TableColumn" prefWidth="69.0" text="Статус" />
               </columns>
                <padding>
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
