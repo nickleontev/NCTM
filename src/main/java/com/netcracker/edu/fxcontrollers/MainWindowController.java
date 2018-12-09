@@ -12,9 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -50,6 +48,7 @@ public class MainWindowController implements Initializable
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private CreateProjectController createProjectController;
     private CreateTaskController createTaskController;
+    private CreateAssigneeController createAssigneeController;
 
 
 
@@ -69,6 +68,7 @@ public class MainWindowController implements Initializable
 
     private Stage createProjectStage;
     private Stage createTaskStage;
+    private Stage createAssigneeStage;
 
     private ObservableList<Project> backupList;
 
@@ -147,6 +147,33 @@ public class MainWindowController implements Initializable
 
         createTaskStage.showAndWait(); // для ожидания закрытия окна
         createTaskController.update();
+    }
+    public void createAssigneeClick(ActionEvent actionEvent) {
+        System.out.println("Нажали кнопку создать контактное лицо");
+        fxmlLoader = new FXMLLoader();
+
+        if (createAssigneeStage == null) {
+
+            try {
+                createAssigneeStage = new Stage();
+                fxmlLoader.setLocation(getClass().getResource("/fxml/CreateAssigneeForm.fxml"));
+                fxmlEdit = fxmlLoader.load();
+                createAssigneeController = fxmlLoader.getController();
+                createAssigneeStage.setTitle("Создать контактное лицо");
+                createAssigneeStage.setResizable(false);
+                Scene scene = new Scene(fxmlEdit);
+                scene.getStylesheets().add("/styles/projectLabel.css");
+                createAssigneeStage.setScene(scene);
+                createAssigneeStage.initModality(Modality.WINDOW_MODAL);
+                //createAssigneeStage.initOwner(((Node)actionEvent.getSource())getScene().getWindow()); *********** Не могу получить владельца-сцену, т.к. MenuItem не является дочерним классом от Node
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        createAssigneeController.update();
+        createAssigneeStage.showAndWait(); // для ожидания закрытия окна
     }
 
     public void doIt() {

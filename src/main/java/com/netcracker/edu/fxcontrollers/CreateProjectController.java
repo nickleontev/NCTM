@@ -1,5 +1,6 @@
 package com.netcracker.edu.fxcontrollers;
 
+import com.netcracker.edu.datasets.Assignee;
 import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.util.RuntimeDataHolder;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -43,8 +45,12 @@ public class CreateProjectController implements Initializable
     @FXML
     private Label parent_Label;
 
+    @FXML
+    private ComboBox<Assignee> assignee_combo;
+
 
     private ResourceBundle resourceBundle;
+    private List<Assignee> assignees;
 
 
 
@@ -84,6 +90,10 @@ public class CreateProjectController implements Initializable
 
         this.resourceBundle = resources;
         parent_Label.setText(data.getCurrent().getSummary());
+
+        //assignees = data.getAssignees();
+        assignee_combo.setItems(data.getAssignees());
+        //assignee_combo.setItems(data.getAssignees());
 
     }
 
