@@ -12,8 +12,9 @@ public class Root {
     public Root() {
     }
 
-   private Project root = new Project("Проекты", "", LocalDate.MIN);
+   private Project root = new Project("Проекты", "", null);
    private Project current = root;
+   private Task currentTask = new Task();
 
     public Project getRoot() {
         return root;
@@ -25,5 +26,13 @@ public class Root {
 
     public void setCurrent(Project current) {
         this.current = current;
+    }
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+
+    public void setCurrentTask(Task currentTask) {
+        this.currentTask = currentTask;
     }
 }

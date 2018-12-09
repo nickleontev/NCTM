@@ -142,6 +142,16 @@ public class Project {
         return taskList;
     }
 
+    public ObservableList<Task> agregate() {
+        ObservableList<Task> observableList = FXCollections.observableArrayList();
+        observableList.addAll(this.taskList);
+
+        for (int i = 0; i<projectList.size(); i++) {
+            observableList.addAll(projectList.get(i).agregate());
+        }
+        return observableList;
+    }
+
     public boolean addSubProject(Project project) {
 
         try {
@@ -170,7 +180,7 @@ public class Project {
     public boolean addTask(Task task) {
 
         try {
-            task.setParentProject(this);
+            task.setParent(this);
             taskList.add(task);
             return true;
         }

@@ -94,6 +94,7 @@ public class CreateTaskController implements Initializable
         parent_Label.setText(data.getCurrent().getSummary());
         description_TextField.clear();
         summary_TextField.clear();
+
     }
 
 }

@@ -8,8 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.temporal.ChronoUnit;
 
 import java.time.LocalDate;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+
 
 public class Task {
 
@@ -20,8 +24,11 @@ public class Task {
     private  ObjectProperty<LocalDate> created;
     private  ObjectProperty<LocalDate> updated;
     private  ObjectProperty<LocalDate> deadline;
+
     //private ObservableList<SubTask> subTasks;
-    private Project parentProject;
+    private ObjectProperty<Project>  parent;
+
+
 
     /**
      * Конструктор по умолчанию.
@@ -37,13 +44,15 @@ public class Task {
      * @param
      */
 
-    public Task(String summary, String description, LocalDate deadline) {
-        this.summary = new SimpleStringProperty(summary);
-        this.description = new SimpleStringProperty(description);
-        this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
-    }
+//    public Task(String summary, String description, LocalDate deadline) {
+//        this.summary = new SimpleStringProperty(summary);
+//        this.description = new SimpleStringProperty(description);
+//        this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+//        this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+//        this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
+//        this.parent = new SimpleObjectProperty<Project>(parentProject);
+//    }
+
 
     public Task(String summary, String description, LocalDate deadline, Project parentProject) {
         this.summary = new SimpleStringProperty(summary);
@@ -51,7 +60,7 @@ public class Task {
         this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
         this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
-        this.parentProject = parentProject;
+        this.parent = new SimpleObjectProperty<Project>(parentProject);;
 
     }
     public String getSummary() {
@@ -61,7 +70,6 @@ public class Task {
     public void setSummary(String summary) {
         this.summary.set(summary);
     }
-
     public StringProperty summaryProperty() {
         return summary;
     }
@@ -114,13 +122,28 @@ public class Task {
         this.description.set(description);
     }
 
-    public Project getParentProject() {
-        return parentProject;
+    public Project getParent() {
+        return parent.get();
     }
 
-    public void setParentProject(Project parentProject) {
-        this.parentProject = parentProject;
+    public ObjectProperty<Project> parentProperty() {
+        return parent;
     }
+
+    public void setParent(Project parent) {
+        this.parent.set(parent);
+    }
+
+    public Long getDateDifference() {
+
+        Long diff = DAYS.between(LocalDate.now(), getDeadline());
+
+        return diff>0 ? diff: 0;
+    }
+
+//    public StringProperty parentProjectProperty() {
+//        return new SimpleStringProperty(getParentProject().getSummary());
+//    }
 
 //    public boolean add (SubTask subTask) {
 //
