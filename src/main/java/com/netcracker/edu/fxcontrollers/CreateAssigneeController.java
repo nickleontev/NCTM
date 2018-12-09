@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ResourceBundle;
 
 public class CreateAssigneeController {
@@ -43,7 +44,7 @@ public class CreateAssigneeController {
 
     private ResourceBundle resourceBundle;
 
-    public void createAssignee(ActionEvent actionEvent){
+    public void createAssignee(ActionEvent actionEvent) throws IOException {
         if (checkEmpty()) {
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
@@ -59,7 +60,9 @@ public class CreateAssigneeController {
         }
         Assignee assignee = new Assignee(fullName_TextField.getText(), phone_TextField.getText(), email_TextField.getText());
         data.setCurrentAssignee(assignee);
+        data.update();
         actionClose(actionEvent);
+
     }
 
     public void actionClose(ActionEvent actionEvent) {

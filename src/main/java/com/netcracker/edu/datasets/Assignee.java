@@ -1,12 +1,14 @@
 package com.netcracker.edu.datasets;
 
-public class Assignee {
+import java.io.Serializable;
+
+public class Assignee implements Serializable {
         private String fullName;
-        private String contactPhone;
+        private String phone;
         private String email;
 
-    public String getContactPhone() {
-        return contactPhone;
+    public String getPhone() {
+        return phone;
     }
 
     public String getEmail() {
@@ -19,7 +21,7 @@ public class Assignee {
 
     public Assignee(String fullName, String contactPhone, String email) {
         this.fullName = fullName;
-        this.contactPhone = contactPhone;
+        this.phone = contactPhone;
         this.email = email;
     }
 
@@ -27,7 +29,7 @@ public class Assignee {
     public String toString() {
         return "Assignee{" +
                 "fullName='" + fullName + '\'' +
-                ", contactPhone='" + contactPhone + '\'' +
+                ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

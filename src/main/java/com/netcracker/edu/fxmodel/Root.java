@@ -7,18 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Root {
+public class Root{
 
     public Root() {
     }
 
    private Project root = new Project("Проекты", "", LocalDate.MIN);
    private Project current = root;
-   private ObservableList<Assignee> assignees = FXCollections.observableArrayList();
+   private ArrayList<Assignee> assignees;// = new ArrayList<>();
 
     public Project getRoot() {
         return root;
@@ -31,19 +32,40 @@ public class Root {
     public void setCurrent(Project current) {
         this.current = current;
     }
+
+    public List<Assignee> getAssignees() {
+        return assignees;
+    }
+
     public void setCurrentAssignee(Assignee assignee){
         assignees.add(assignee);
     }
 
-    public ObservableList<Assignee> getAssignees(){
-        return assignees;
+    public ObservableList<Assignee> getObservableListAssignees(){
+        //ObservableList<Assignee> observableListAssignees = (ObservableList)assignees;//FXCollections.observableArrayList();
+        //observableListAssignees = (ObservableList)assignees;
+        return FXCollections.observableArrayList(assignees);
     }
 
-    public String[] getNamesAssignees(){
-        String[] names = new String[assignees.size()];
-        for (int i = 0; i < assignees.size(); i ++){
-            names[i] = assignees.get(i).getFullName();
-        }
-        return names;
+    public void onStart() throws IOException, ClassNotFoundException{
+        assignees = (ArrayList<Assignee>) readAssignee();
+    }
+
+    public void onClose() throws IOException{
+        writeAssignee();
+    }
+
+    public void update() throws IOException{
+
+        writeAssignee();
+    }
+
+    private void writeAssignee() throws IOException{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("assignee.data"));
+        oos.writeObject(assignees);
+    }
+    private Object readAssignee() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("assignee.data"));
+        return ois.readObject();
     }
 }

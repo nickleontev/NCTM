@@ -13,7 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class MainWindowController implements Initializable
     private CreateProjectController createProjectController;
     private CreateTaskController createTaskController;
     private CreateAssigneeController createAssigneeController;
-
+    private ShowAssigneeStageController showAssigneeStageController;
 
 
 //
@@ -69,12 +70,15 @@ public class MainWindowController implements Initializable
     private Stage createProjectStage;
     private Stage createTaskStage;
     private Stage createAssigneeStage;
+    private Stage showAssigneeStage;
 
     private ObservableList<Project> backupList;
 
     private Stage mainStage;
     private Parent fxmlEdit;
     private ResourceBundle resourceBundle;
+
+
 
     //private EditDialogController editDialogController;
 
@@ -176,6 +180,24 @@ public class MainWindowController implements Initializable
         createAssigneeStage.showAndWait(); // для ожидания закрытия окна
     }
 
+    public void showAssignee() throws IOException{
+        fxmlLoader = new FXMLLoader();
+         if (showAssigneeStage == null){
+
+                 showAssigneeStage = new Stage();
+                 fxmlLoader.setLocation(getClass().getResource("/fxml/ShowAssigneeForm.fxml"));
+                 fxmlEdit = fxmlLoader.load();
+                 showAssigneeStageController = fxmlLoader.getController();
+                 showAssigneeStage.setTitle("Список контактов");
+                 Scene scene = new Scene(fxmlEdit);
+                 scene.getStylesheets().add("/styles/projectLabel.css");
+                 showAssigneeStage.setScene(scene);
+                 showAssigneeStage.initModality(Modality.WINDOW_MODAL);
+                 showAssigneeStage.showAndWait();
+                 showAssigneeStageController.initializeData();
+         }
+    }
+
     public void doIt() {
         Tree tree = new Tree(project_treeView, tasks_TableView, data.getRoot().getProjectList(), data.getRoot());
         //tree.getTreeView();
@@ -184,6 +206,24 @@ public class MainWindowController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+
+        try{
+            data.onStart();
+        } catch (IOException ioEx) {
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+//            Node source = (Node) actionEvent.getSource();
+//            Stage stage = (Stage) source.getScene().getWindow();
+//            dialog.initOwner(stage);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("Импорт контактов при первом запуске"));
+            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (ClassNotFoundException cnfEx){
+
+        }
 
         this.resourceBundle = resources;
         task_TableColumn.setCellValueFactory(new PropertyValueFactory<Task,String>("summary"));

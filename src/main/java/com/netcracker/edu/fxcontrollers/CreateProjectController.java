@@ -91,9 +91,9 @@ public class CreateProjectController implements Initializable
         this.resourceBundle = resources;
         parent_Label.setText(data.getCurrent().getSummary());
 
-        //assignees = data.getAssignees();
-        assignee_combo.setItems(data.getAssignees());
-        //assignee_combo.setItems(data.getAssignees());
+        //assignees = data.getObservableListAssignees();
+        assignee_combo.setItems(data.getObservableListAssignees());
+        //assignee_combo.setItems(data.getObservableListAssignees());
 
     }
 
