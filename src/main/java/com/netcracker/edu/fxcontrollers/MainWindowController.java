@@ -18,6 +18,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.text.Text;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -73,7 +76,8 @@ public class MainWindowController implements Initializable
     private FXMLLoader fxmlLoader = new FXMLLoader();
     private CreateProjectController createProjectController;
     private CreateTaskController createTaskController;
-
+    private CreateAssigneeController createAssigneeController;
+    private ShowAssigneeStageController showAssigneeStageController;
 
 
 //
@@ -92,6 +96,8 @@ public class MainWindowController implements Initializable
 
     private Stage createProjectStage;
     private Stage createTaskStage;
+    private Stage createAssigneeStage;
+    private Stage showAssigneeStage;
 
     private ObservableList<Project> backupList;
 
@@ -129,10 +135,9 @@ public class MainWindowController implements Initializable
            }
        }
 
-       createProjectController.update();
-       createProjectStage.setTitle(title);
-       createProjectStage.showAndWait();
-   }
+        createProjectController.update();
+        createProjectStage.showAndWait(); // для ожидания закрытия окна
+    }
 
     public void createTaskClick(ActionEvent actionEvent) {
 
@@ -167,6 +172,51 @@ public class MainWindowController implements Initializable
         createTaskStage.showAndWait(); // для ожидания закрытия окна
         createTaskController.update();
         tasks_TableView.setItems(data.getCurrent().agregate());
+    }
+    public void createAssigneeClick(ActionEvent actionEvent) {
+        System.out.println("Нажали кнопку создать контактное лицо");
+        fxmlLoader = new FXMLLoader();
+
+        if (createAssigneeStage == null) {
+
+            try {
+                createAssigneeStage = new Stage();
+                fxmlLoader.setLocation(getClass().getResource("/fxml/CreateAssigneeForm.fxml"));
+                fxmlEdit = fxmlLoader.load();
+                createAssigneeController = fxmlLoader.getController();
+                createAssigneeStage.setTitle("Создать контактное лицо");
+                createAssigneeStage.setResizable(false);
+                Scene scene = new Scene(fxmlEdit);
+                scene.getStylesheets().add("/styles/projectLabel.css");
+                createAssigneeStage.setScene(scene);
+                createAssigneeStage.initModality(Modality.WINDOW_MODAL);
+                //createAssigneeStage.initOwner(((Node)actionEvent.getSource())getScene().getWindow()); *********** Не могу получить владельца-сцену, т.к. MenuItem не является дочерним классом от Node
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        createAssigneeController.update();
+        createAssigneeStage.showAndWait(); // для ожидания закрытия окна
+    }
+
+    public void showAssignee() throws IOException{
+        fxmlLoader = new FXMLLoader();
+         if (showAssigneeStage == null){
+
+                 showAssigneeStage = new Stage();
+                 fxmlLoader.setLocation(getClass().getResource("/fxml/ShowAssigneeForm.fxml"));
+                 fxmlEdit = fxmlLoader.load();
+                 showAssigneeStageController = fxmlLoader.getController();
+                 showAssigneeStage.setTitle("Список контактов");
+                 Scene scene = new Scene(fxmlEdit);
+                 scene.getStylesheets().add("/styles/projectLabel.css");
+                 showAssigneeStage.setScene(scene);
+                 showAssigneeStage.initModality(Modality.WINDOW_MODAL);
+                 showAssigneeStage.showAndWait();
+                 showAssigneeStageController.initializeData();
+         }
     }
 
     public void doIt() {
@@ -233,6 +283,24 @@ public class MainWindowController implements Initializable
     public void initialize(URL location, ResourceBundle resources) {
 
         projectSummary_Label.setText(data.getCurrent().getSummary());
+
+
+        try{
+            data.onStart();
+        } catch (IOException ioEx) {
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+//            Node source = (Node) actionEvent.getSource();
+//            Stage stage = (Stage) source.getScene().getWindow();
+//            dialog.initOwner(stage);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("Импорт контактов при первом запуске"));
+            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        } catch (ClassNotFoundException cnfEx){
+
+        }
 
         this.resourceBundle = resources;
         task_TableColumn.setCellValueFactory(new PropertyValueFactory<Task,String>("summary"));

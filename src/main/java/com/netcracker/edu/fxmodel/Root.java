@@ -12,9 +12,10 @@ public class Root {
     public Root() {
     }
 
-   private Project root = new Project("Проекты", "", null);
+   private Project root = new Project("Проекты", "", LocalDate.MIN);
    private Project current = root;
    private Task currentTask = new Task();
+   private ArrayList<Assignee> assignees;// = new ArrayList<>();
 
     public Project getRoot() {
         return root;
@@ -34,5 +35,41 @@ public class Root {
 
     public void setCurrentTask(Task currentTask) {
         this.currentTask = currentTask;
+    }
+
+    public List<Assignee> getAssignees() {
+        return assignees;
+    }
+
+    public void setCurrentAssignee(Assignee assignee){
+        assignees.add(assignee);
+    }
+
+    public ObservableList<Assignee> getObservableListAssignees(){
+        //ObservableList<Assignee> observableListAssignees = (ObservableList)assignees;//FXCollections.observableArrayList();
+        //observableListAssignees = (ObservableList)assignees;
+        return FXCollections.observableArrayList(assignees);
+    }
+
+    public void onStart() throws IOException, ClassNotFoundException{
+        assignees = (ArrayList<Assignee>) readAssignee();
+    }
+
+    public void onClose() throws IOException{
+        writeAssignee();
+    }
+
+    public void update() throws IOException{
+
+        writeAssignee();
+    }
+
+    private void writeAssignee() throws IOException{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("assignee.data"));
+        oos.writeObject(assignees);
+    }
+    private Object readAssignee() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("assignee.data"));
+        return ois.readObject();
     }
 }
