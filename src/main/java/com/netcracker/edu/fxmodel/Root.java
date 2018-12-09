@@ -1,18 +1,22 @@
 package com.netcracker.edu.fxmodel;
 
 import com.netcracker.edu.dao.interfaces.ProjectDAO;
+import com.netcracker.edu.datasets.Assignee;
 import com.netcracker.edu.fxmodel.Project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Root {
 
     public Root() {
     }
 
-   private Project root = new Project("Проекты", "", LocalDate.MIN);
+   private Project root = new Project("Проекты", "", null);
    private Project current = root;
    private Task currentTask = new Task();
    private ArrayList<Assignee> assignees;// = new ArrayList<>();

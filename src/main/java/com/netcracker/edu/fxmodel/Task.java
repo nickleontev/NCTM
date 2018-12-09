@@ -136,9 +136,10 @@ public class Task {
 
     public Long getDateDifference() {
 
-        Long diff = DAYS.between(LocalDate.now(), getDeadline());
-
-        return diff>0 ? diff: 0;
+        if (getDeadline()!=null) {
+            Long diff = DAYS.between(LocalDate.now(), getDeadline());
+            return diff > 0 ? diff : 0;
+        }else  return  Long.valueOf(0);
     }
 
 //    public StringProperty parentProjectProperty() {

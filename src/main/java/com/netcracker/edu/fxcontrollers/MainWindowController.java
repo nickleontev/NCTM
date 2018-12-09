@@ -214,9 +214,10 @@ public class MainWindowController implements Initializable
                  scene.getStylesheets().add("/styles/projectLabel.css");
                  showAssigneeStage.setScene(scene);
                  showAssigneeStage.initModality(Modality.WINDOW_MODAL);
-                 showAssigneeStage.showAndWait();
+
                  showAssigneeStageController.initializeData();
          }
+        showAssigneeStage.showAndWait();
     }
 
     public void doIt() {

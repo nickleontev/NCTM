@@ -6,6 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!--<?import org.tbee.javafx.scene.layout.fxml.MigPane?>-->
+
 <SplitPane dividerPositions="0.5, 0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.netcracker.edu.fxcontrollers.MainWindowController">
    <items>
       <AnchorPane minWidth="65.0" prefHeight="400.0" prefWidth="200.0">
@@ -22,11 +24,11 @@
             </TreeView>
             <Button layoutX="20.0" layoutY="2.0" mnemonicParsing="false" text="≡" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
             <Button layoutX="19.0" layoutY="426.0" mnemonicParsing="false" onAction="#createProjectClick" prefHeight="25.0" prefWidth="200.0" text="+Создать проект" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
-            <SplitMenuButton layoutX="51.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Nick" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
+            <SplitMenuButton layoutX="51.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Контакты" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#createAssigneeClick" text="Добавить контакт" />
+                  <MenuItem mnemonicParsing="false" onAction="#showAssignee" text="Список контактов" />
+               </items>
             </SplitMenuButton>
          </children>
       </AnchorPane>
@@ -103,6 +105,6 @@
             <TextField fx:id="taskSummary_TextField" layoutX="11.0" layoutY="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
          </children>
       </AnchorPane>
-      <MigPane prefHeight="200.0" prefWidth="200.0" />
+      <!--<MigPane prefHeight="200.0" prefWidth="200.0" />-->
    </items>
 </SplitPane>

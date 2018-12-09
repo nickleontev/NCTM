@@ -18,19 +18,19 @@ public class ShowAssigneeStageController {
     //private List<Assignee> assignees;
 
     @FXML
-    public TableView assignees_TableView;
+    public TableView <Assignee> assignees_TableView;
 
 
     @FXML
-    public TableColumn fullName = new TableColumn("Full name");
+    public TableColumn <Assignee,String> fullName;
 
 
     @FXML
-    public TableColumn phone = new TableColumn("Phone number");
+    public TableColumn <Assignee,String> phone;
 
 
     @FXML
-    public TableColumn email = new TableColumn("Email");
+    public TableColumn <Assignee,String> email;
 
 
 
@@ -44,9 +44,11 @@ public class ShowAssigneeStageController {
         phone.setCellValueFactory( new PropertyValueFactory<Assignee, String>("phone"));
         email.setCellValueFactory( new PropertyValueFactory<Assignee, String>("email"));
 
-        assignees_TableView.setItems(assignees);
 
-        assignees_TableView.getColumns().addAll(fullName, phone, email);
+
+        //assignees_TableView.getColumns().addAll(fullName, phone, email);
+
+        assignees_TableView.setItems(assignees);
        // assignees = data.getObservableListAssignees();
         //for(int i = 0; i < assignees.size(); i++){
 //            assignees_TableView.setItems(data.getObservableListAssignees());
