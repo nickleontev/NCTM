@@ -88,6 +88,7 @@ public class CreateProjectController implements Initializable
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         this.resourceBundle = resources;
         parent_Label.setText(data.getCurrent().getSummary());
 

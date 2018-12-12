@@ -3,8 +3,10 @@ package com.netcracker.edu.fxcontrollers;
 import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.fxmodel.Task;
+import com.netcracker.edu.util.DialogManager;
 import com.netcracker.edu.util.RuntimeDataHolder;
 import com.netcracker.edu.util.Tree;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -31,9 +33,11 @@ import javafx.event.ActionEvent;
 
 
 import java.io.IOException;
+import java.lang.annotation.ElementType;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MainWindowController implements Initializable
 {
@@ -105,119 +109,72 @@ public class MainWindowController implements Initializable
     private Parent fxmlEdit;
     private ResourceBundle resourceBundle;
 
-    //private EditDialogController editDialogController;
-
-
-
+    /**
+     * <p>Method for opening the modal window "Создать проект" when you click on the button "Создать проект"</p>
+     */
     public void createProjectClick(ActionEvent actionEvent) {
-        openProjectForm(actionEvent,"Создание проекта");
+       createProjectStage = showModalWindow("Создать проект",actionEvent, createProjectStage, "/fxml/CreateProjectForm.fxml", "/styles/projectLabel.css");
     }
 
-
-   private void openProjectForm(ActionEvent actionEvent, String title) {
-
-       if (createProjectStage == null) {
-           fxmlLoader = new FXMLLoader();
-           try {
-               createProjectStage = new Stage();
-               fxmlLoader.setLocation(getClass().getResource("/fxml/CreateProjectForm.fxml"));
-               fxmlEdit = fxmlLoader.load();
-               createProjectController = fxmlLoader.getController();
-               createProjectStage.setResizable(false);
-               Scene scene = new Scene(fxmlEdit);
-               scene.getStylesheets().add("/styles/projectLabel.css");
-               createProjectStage.setScene(scene);
-               createProjectStage.initModality(Modality.WINDOW_MODAL);
-               createProjectStage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-       }
-
-        createProjectController.update();
-        createProjectStage.showAndWait(); // для ожидания закрытия окна
-    }
-
+    /**
+     * <p>Method for opening the modal window "Добавить задачу" when you click on the button "Добавить задачу"</p>
+     */
     public void createTaskClick(ActionEvent actionEvent) {
 
-        fxmlLoader = new FXMLLoader();
-        if (createTaskStage == null) {
-
-            try {
-                createTaskStage = new Stage();
-
-                fxmlLoader.setLocation(getClass().getResource("/fxml/CreateTaskForm.fxml"));
-                // fxmlLoader.setResources(ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.getCurrentLang().getLocale()));
-                fxmlEdit = fxmlLoader.load();
-                createTaskController = fxmlLoader.getController();
-
-//                Parent root = FXMLLoader.load(getClass().getResource("/fxml/CreateProjectForm.fxml"));
-                // createProjectStage.setTitle(resourceBundle.getString("edit"));
-                createTaskStage.setTitle("Создать задачу");
-//                createProjectStage.setMinHeight(150);
-//                createProjectStage.setMinWidth(300);
-                createTaskStage.setResizable(false);
-                Scene scene = new Scene(fxmlEdit);
-                scene.getStylesheets().add("/styles/projectLabel.css");
-                createTaskStage.setScene(scene);
-                createTaskStage.initModality(Modality.WINDOW_MODAL);
-                createTaskStage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        createTaskStage.showAndWait(); // для ожидания закрытия окна
-        createTaskController.update();
+        createTaskStage = showModalWindow("Добавить задачу", actionEvent, createTaskStage, "/fxml/CreateTaskForm.fxml", "/styles/projectLabel.css");// для ожидания закрытия окна
         tasks_TableView.setItems(data.getCurrent().agregate());
     }
+
+    /**
+     * <p>Method for opening the modal window "Добавить исполнителя" when you click on the menu item "Добавить исполнителя"</p>
+     */
     public void createAssigneeClick(ActionEvent actionEvent) {
         System.out.println("Нажали кнопку создать контактное лицо");
-        fxmlLoader = new FXMLLoader();
 
-        if (createAssigneeStage == null) {
-
-            try {
-                createAssigneeStage = new Stage();
-                fxmlLoader.setLocation(getClass().getResource("/fxml/CreateAssigneeForm.fxml"));
-                fxmlEdit = fxmlLoader.load();
-                createAssigneeController = fxmlLoader.getController();
-                createAssigneeStage.setTitle("Создать контактное лицо");
-                createAssigneeStage.setResizable(false);
-                Scene scene = new Scene(fxmlEdit);
-                scene.getStylesheets().add("/styles/projectLabel.css");
-                createAssigneeStage.setScene(scene);
-                createAssigneeStage.initModality(Modality.WINDOW_MODAL);
-                //createAssigneeStage.initOwner(((Node)actionEvent.getSource())getScene().getWindow()); *********** Не могу получить владельца-сцену, т.к. MenuItem не является дочерним классом от Node
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        createAssigneeController.update();
-        createAssigneeStage.showAndWait(); // для ожидания закрытия окна
+        createAssigneeStage = showModalWindow("Добавить исполнителя", actionEvent, createAssigneeStage,  "/fxml/CreateAssigneeForm.fxml","");
     }
 
-    public void showAssignee() throws IOException{
-        fxmlLoader = new FXMLLoader();
-         if (showAssigneeStage == null){
+    /**
+     * <p>Method for opening the modal window "Исполнители" when you click on the menu item "Исполнители"</p>
+     */
+    public void showAssignee(ActionEvent actionEvent) throws IOException{
 
-                 showAssigneeStage = new Stage();
-                 fxmlLoader.setLocation(getClass().getResource("/fxml/ShowAssigneeForm.fxml"));
-                 fxmlEdit = fxmlLoader.load();
-                 showAssigneeStageController = fxmlLoader.getController();
-                 showAssigneeStage.setTitle("Список контактов");
-                 Scene scene = new Scene(fxmlEdit);
-                 scene.getStylesheets().add("/styles/projectLabel.css");
-                 showAssigneeStage.setScene(scene);
-                 showAssigneeStage.initModality(Modality.WINDOW_MODAL);
+       showAssigneeStage = showModalWindow("Исполнители", actionEvent, showAssigneeStage, "/fxml/ShowAssigneeForm.fxml","" );
+    }
 
-                 showAssigneeStageController.initializeData();
-         }
-        showAssigneeStage.showAndWait();
+    /**
+     * <p>Method for initializing and opening modal windows</p>
+     *
+     * @param title Name of window title
+     * @param actionEvent Was needed to specify the parent window
+     * @param stage To initialize a concrete stage for a child window.
+     * @param fxmlpath Path to fxml source
+     * @param css Path to css source. The style will not be set if the parameter is empty string.
+     */
+    private Stage showModalWindow(String title, ActionEvent actionEvent,Stage stage, String fxmlpath, String css) {
+        if (stage == null){
+            fxmlLoader = new FXMLLoader();
+            try {
+                stage = new Stage();
+                fxmlLoader.setLocation(getClass().getResource(fxmlpath));
+                fxmlEdit = fxmlLoader.load();
+                stage.setResizable(false);
+                Scene scene = new Scene(fxmlEdit);
+                stage.setScene(scene);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                //stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+                stage.setTitle(title);
+
+                if (!css.equals("")) {
+                    scene.getStylesheets().add(css);
+                }
+            }
+            catch (IOException ex) {
+                log.debug("Ошибка при создании компонентов окна пользовательского интерфейса");
+            }
+        }
+        stage.showAndWait();
+        return stage;
     }
 
     public void doIt() {
@@ -229,7 +186,7 @@ public class MainWindowController implements Initializable
 
             @Override
             public void handle(ActionEvent event) {
-                openProjectForm(event,"Редактирование проекта");
+
             }
         });
         MenuItem item2 = new MenuItem("Удалить");

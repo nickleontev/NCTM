@@ -12,18 +12,13 @@
    <items>
       <AnchorPane minWidth="65.0" prefHeight="400.0" prefWidth="200.0">
          <children>
-            <Button layoutX="22.0" layoutY="508.0" minWidth="110.0" mnemonicParsing="false" onAction="#createTaskClick" prefHeight="25.0" prefWidth="200.0" text="+Создать задачу" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="20.0">
-               <padding>
-                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-               </padding>
-            </Button>
             <TreeView fx:id="project_treeView" layoutX="14.0" layoutY="21.0" minWidth="25.0" prefHeight="422.0" prefWidth="291.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                <opaqueInsets>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </opaqueInsets>
             </TreeView>
             <Button layoutX="20.0" layoutY="2.0" mnemonicParsing="false" text="≡" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
-            <Button layoutX="19.0" layoutY="426.0" mnemonicParsing="false" onAction="#createProjectClick" prefHeight="25.0" prefWidth="200.0" text="+Создать проект" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
+            <Button layoutX="19.0" layoutY="426.0" maxHeight="25.0" maxWidth="130.0" mnemonicParsing="false" onAction="#createProjectClick" prefHeight="25.0" prefWidth="130.0" text="▲ Создать проект" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="20.0" />
             <SplitMenuButton layoutX="51.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Контакты" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#createAssigneeClick" text="Добавить контакт" />
@@ -49,9 +44,9 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button layoutX="20.0" layoutY="477.0" mnemonicParsing="false" text="+Добавить задачу" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" />
             <Label fx:id="projectSummary_Label" layoutX="20.0" layoutY="6.0" text="Название проекта" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
             <DatePicker fx:id="deadline_DatePicker" promptText="Дедлайн проекта" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+            <Button layoutX="23.0" layoutY="364.0" maxHeight="25.0" maxWidth="130.0" mnemonicParsing="false" onAction="#createTaskClick" prefHeight="25.0" prefWidth="130.0" text="📅 Добавить задачу" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="20.0" />
          </children>
       </AnchorPane>
       <AnchorPane minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
@@ -96,13 +91,17 @@
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding>
             </Button>
-            <Button layoutX="11.0" layoutY="498.0" minHeight="25.0" minWidth="25.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="&gt;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+            <Button layoutX="11.0" layoutY="498.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="&gt;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
             <Button layoutX="23.0" layoutY="229.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="154.0" text="Открыть список напоминаний" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="10.0">
                <padding>
                   <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                </padding>
             </Button>
             <TextField fx:id="taskSummary_TextField" layoutX="11.0" layoutY="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+            <Button layoutX="20.0" layoutY="384.0" minHeight="30.0" minWidth="30.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" text="×" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
       <!--<MigPane prefHeight="200.0" prefWidth="200.0" />-->
