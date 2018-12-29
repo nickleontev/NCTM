@@ -1,6 +1,7 @@
 package com.netcracker.edu;
 
 import com.netcracker.edu.fxmodel.Root;
+import com.netcracker.edu.util.NotificationController;
 import com.netcracker.edu.util.RuntimeDataHolder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

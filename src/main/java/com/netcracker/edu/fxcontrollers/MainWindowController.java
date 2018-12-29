@@ -4,6 +4,7 @@ import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.fxmodel.Task;
 import com.netcracker.edu.util.DialogManager;
+import com.netcracker.edu.util.NotificationController;
 import com.netcracker.edu.util.RuntimeDataHolder;
 import com.netcracker.edu.util.Tree;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
@@ -82,6 +83,7 @@ public class MainWindowController implements Initializable
     private CreateTaskController createTaskController;
     private CreateAssigneeController createAssigneeController;
     private ShowAssigneeStageController showAssigneeStageController;
+    private NotificationController notificationController;
 
 
 //
@@ -102,6 +104,7 @@ public class MainWindowController implements Initializable
     private Stage createTaskStage;
     private Stage createAssigneeStage;
     private Stage showAssigneeStage;
+    private Stage addNotificationStage;
 
     private ObservableList<Project> backupList;
 
@@ -140,6 +143,13 @@ public class MainWindowController implements Initializable
     public void showAssignee(ActionEvent actionEvent) throws IOException{
 
        showAssigneeStage = showModalWindow("Исполнители", actionEvent, showAssigneeStage, "/fxml/ShowAssigneeForm.fxml","" );
+    }
+
+    public void addNotification_click(ActionEvent actionEvent) {
+
+        addNotificationStage = showModalWindow("Уведомления", actionEvent, addNotificationStage, "/fxml/CreateNotificationForm.fxml", "");
+        notificationController.displayMessage("NOVAYA", "TEXTJOPA");
+        notificationController.end();
     }
 
     /**
@@ -344,6 +354,11 @@ public class MainWindowController implements Initializable
 
         doIt();
 
+        notificationController = new NotificationController();
+        try {
+            notificationController.displayTray();
+        } catch(Exception ex){}
+        notificationController.displayMessage("JOPA", "TEXTJOPA");
         //TreeItem<Project> rootItem = new TreeItem<Project>(data.getRoot());doIt();
 
         //rootItem.setExpanded(true);
@@ -353,4 +368,6 @@ public class MainWindowController implements Initializable
     public void setMainStage(Stage mainStage) {
         this.mainStage = mainStage;
     }
+
+
 }
