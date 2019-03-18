@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="440.0" maxWidth="320.0" prefHeight="440.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.netcracker.edu.fxcontrollers.NotificationFormController">
+   <children>
+      <TableView fx:id="notification_TableView" layoutX="20.0" layoutY="129.0" prefHeight="291.0" prefWidth="280.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="129.0">
+        <columns>
+          <TableColumn fx:id="date_TableColumn" prefWidth="75.0" sortable="false" text="Дата" />
+            <TableColumn fx:id="time_TableColumn" prefWidth="75.0" sortable="false" text="Время" />
+            <TableColumn fx:id="mode_TableColumn" prefWidth="75.0" sortable="false" text="Напомнить" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="add_Button" layoutX="266.0" layoutY="19.0" maxHeight="95.0" maxWidth="35.0" minHeight="95.0" minWidth="35.0" mnemonicParsing="false" onAction="#add_Click" prefHeight="95.0" prefWidth="35.0" text="⏰" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <DatePicker fx:id="date_DatePicker" layoutX="20.0" layoutY="18.0" prefHeight="25.0" prefWidth="233.0" promptText="Дата" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="20.0" />
+      <ComboBox fx:id="mode_ComboBox" layoutX="20.0" layoutY="88.0" maxHeight="25.0" maxWidth="234.0" prefHeight="25.0" prefWidth="234.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="90.0" />
+      <Label layoutX="20.0" layoutY="59.0" text="Напомнить мне в" AnchorPane.leftAnchor="20.0" />
+      <Label layoutX="190.0" layoutY="58.0" text=":" AnchorPane.rightAnchor="126.0" />
+      <ComboBox fx:id="hours_ComboBox" layoutX="130.0" layoutY="90.0" maxHeight="25.0" maxWidth="55.0" minHeight="25.0" minWidth="55.0" prefHeight="25.0" prefWidth="55.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="55.0" />
+      <ComboBox fx:id="minutes_ComboBox" layoutX="140.0" layoutY="100.0" maxHeight="25.0" maxWidth="55.0" minHeight="25.0" minWidth="55.0" prefHeight="25.0" prefWidth="55.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="55.0" />
+   </children>
+</AnchorPane>

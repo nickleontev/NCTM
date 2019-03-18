@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="295.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.netcracker.edu.fxcontrollers.AssigneeFormController">
+   <children>
+      <TextField fx:id="name_TextField" layoutX="57.0" layoutY="62.0" prefHeight="25.0" prefWidth="332.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <TableView fx:id="assignees_TableView" layoutX="57.0" layoutY="123.0" prefHeight="200.0" prefWidth="412.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="70.0">
+        <columns>
+          <TableColumn fx:id="assignee_TableColumn" prefWidth="75.0" sortable="false" text="Исполнители" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="add_Button" layoutX="360.0" layoutY="62.0" mnemonicParsing="false" onAction="#add_Click" prefHeight="25.0" prefWidth="71.0" text="Добавить" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="20.0" />
+   </children>
+</AnchorPane>

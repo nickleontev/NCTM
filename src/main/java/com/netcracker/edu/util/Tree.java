@@ -1,6 +1,5 @@
 package com.netcracker.edu.util;
 
-import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
@@ -9,7 +8,6 @@ import java.util.List;
 import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.fxmodel.Task;
-import com.sun.javafx.scene.control.skin.TableCellSkin;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
@@ -25,16 +23,18 @@ public class Tree {
 
     private TreeView<Project> treeView ;
     private TableView<Task> tableView ;
+    private  CheckBox checkBox;
+
     private Root data = RuntimeDataHolder.getHolder();
 
     private final List<Class<? extends Project>> itemTypes = Arrays.asList(
             Project.class
     );
 
-    public Tree(TreeView tree, TableView tb, Label label, DatePicker datePicker, ObservableList<Project> accounts, ContextMenu contextMenu, Project root) {
+    public Tree(TreeView tree, TableView tb, Label label, DatePicker datePicker, ObservableList<Project> accounts, ContextMenu contextMenu, Project root, CheckBox cb) {
         treeView = tree;
         tableView = tb;
-
+        checkBox = cb;
 
         treeView.setContextMenu(contextMenu);
         TreeItem<Project> treeRoot = createItem(root);
@@ -87,7 +87,7 @@ public class Tree {
 
             cell.hoverProperty().addListener((obs, wasHovered, isNowHovered) -> {
                 if (isNowHovered && (! cell.isEmpty())) {
-                    //System.out.println("Mouse hover on "+cell.getItem().getSummary());
+                    //System.out.println("Mouse hover on "+cell.getItem().getName());
                 }
             });
 
@@ -96,11 +96,16 @@ public class Tree {
                 if (! cell.isEmpty()) {
 
                     data.setCurrent(cell.getItem());
-                    tableView.setItems(data.getCurrent().agregate());
+
+                    if (cb.isSelected())
+                        tableView.setItems(data.getCurrent().agregateNasted());
+                    else tableView.setItems((ObservableList<Task>) data.getCurrent().getTaskList());
+
+                    //tableView.setItems(data.getCurrent().agregateNasted());
                     label.setText(data.getCurrent().getSummary());
                     datePicker.setValue(data.getCurrent().getDeadline());
 
-                    //System.out.println(data.getCurrentTask().getSummary());
+                    //System.out.println(data.getCurrentTask().getName());
                 }
 
             });
@@ -112,6 +117,9 @@ public class Tree {
     public TreeView<Project> getTreeView() {
         return treeView ;
     }
+
+
+
 
     private TreeItem<Project> createItem(Project object) {
 
@@ -130,7 +138,7 @@ public class Tree {
 
         // update tree item's children list if game object's list changes:
 
-        object.getProjectList().addListener((Change<? extends Project> c) -> {
+        ((ObservableList<Project>)object.getProjectList()).addListener((Change<? extends Project> c) -> {
             while (c.next()) {
                 if (c.wasAdded()) {
                     item.getChildren().addAll(c.getAddedSubList().stream().map(this::createItem).collect(toList()));

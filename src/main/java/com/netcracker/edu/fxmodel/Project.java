@@ -1,6 +1,7 @@
 package com.netcracker.edu.fxmodel;
 
-import com.netcracker.edu.fxcontrollers.MainWindowController;
+import com.netcracker.edu.util.xmladapters.LocalDateAdapter;
+import com.netcracker.edu.util.xmladapters.ProjectAdapter;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,8 +11,16 @@ import javafx.collections.ObservableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
+import java.util.List;
 
+@XmlJavaTypeAdapter(value = ProjectAdapter.class)
+@XmlRootElement(name = "root")
 public class Project {
 
     private static final Logger log = LoggerFactory.getLogger(Project.class);
@@ -24,21 +33,23 @@ public class Project {
     private ObservableList<Project> projectList;
 
     private ObservableList<Task> taskList;
-    private Project parentProject;
+
+
+   private Project parentProject;
 
     /**
      * Конструктор по умолчанию.
      */
     public Project() {
 
+        this(null, null, null);
+
+       this.projectList = FXCollections.observableArrayList();
+       this.taskList = FXCollections.observableArrayList();
+
     }
 
-    /**
-     * Конструктор с некоторыми начальными данными.
-     *
-     * @param
-     * @param
-     */
+
 
     public Project(String summary, String description, LocalDate deadline) {
         this.summary = new SimpleStringProperty(summary);
@@ -48,20 +59,23 @@ public class Project {
         this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
         this.projectList = FXCollections.observableArrayList();
         this.taskList = FXCollections.observableArrayList();
-
     }
 
     public Project(String summary, String description, LocalDate deadline, Project parentProject) {
-        this.summary = new SimpleStringProperty(summary);
-        this.description = new SimpleStringProperty(description);
-        this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
-        this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
-        this.projectList = FXCollections.observableArrayList();
+//        this.summary = new SimpleStringProperty(summary);
+//        this.description = new SimpleStringProperty(description);
+//        this.created = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+//        this.updated = new SimpleObjectProperty<LocalDate>(LocalDate.now());
+//        this.deadline = new SimpleObjectProperty<LocalDate>(deadline);
+//        this.projectList = FXCollections.observableArrayList();
+//        this.taskList = FXCollections.observableArrayList();
+
+        this(summary, description, deadline);
+
         this.parentProject = parentProject;
-        this.taskList = FXCollections.observableArrayList();
 
     }
+
     public String getSummary() {
         return summary.get();
     }
@@ -74,6 +88,7 @@ public class Project {
         return summary;
     }
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     public LocalDate getCreated() {
         return created.get();
     }
@@ -86,6 +101,7 @@ public class Project {
         return created;
     }
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     public LocalDate getUpdated() {
         return updated.get();
     }
@@ -98,6 +114,7 @@ public class Project {
         return updated;
     }
 
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     public LocalDate getDeadline() {
         return deadline.get();
     }
@@ -110,12 +127,14 @@ public class Project {
         this.deadline.set(deadline);
     }
 
-    public ObservableList<Project> getProjectList() {
+    //@XmlJavaTypeAdapter(ProjectAdapter.class)
+    @XmlElements({ @XmlElement(name = "project", type = Project.class) })
+    public List<Project> getProjectList() {
         return projectList;
     }
 
-    public void setProjectList(ObservableList<Project> projectList) {
-        this.projectList = projectList;
+    public void setProjectList(List<Project> projectList) {
+        this.projectList.addAll(projectList);
     }
 
     public String getDescription() {
@@ -130,6 +149,11 @@ public class Project {
         this.description.set(description);
     }
 
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
+    }
+
+    @XmlTransient
     public Project getParentProject() {
         return parentProject;
     }
@@ -138,16 +162,17 @@ public class Project {
         this.parentProject = parentProject;
     }
 
-    public ObservableList<Task> getTaskList() {
+    @XmlElements({ @XmlElement(name = "task", type = Task.class) })
+    public List<Task> getTaskList() {
         return taskList;
     }
 
-    public ObservableList<Task> agregate() {
+    public ObservableList<Task> agregateNasted() {
         ObservableList<Task> observableList = FXCollections.observableArrayList();
         observableList.addAll(this.taskList);
 
         for (int i = 0; i<projectList.size(); i++) {
-            observableList.addAll(projectList.get(i).agregate());
+            observableList.addAll(projectList.get(i).agregateNasted());
         }
         return observableList;
     }

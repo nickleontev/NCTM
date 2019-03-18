@@ -59,8 +59,8 @@ public class CreateAssigneeController {
             return;
         }
         Assignee assignee = new Assignee(fullName_TextField.getText(), phone_TextField.getText(), email_TextField.getText());
-        data.setCurrentAssignee(assignee);
-        data.update();
+       // data.setCurrentAssignee(assignee);
+       // data.update();
         actionClose(actionEvent);
 
     }

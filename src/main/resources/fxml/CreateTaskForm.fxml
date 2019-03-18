@@ -15,7 +15,7 @@
       <Label layoutX="81.0" layoutY="269.0" prefHeight="17.0" prefWidth="50.0" text="Дедлайн" textAlignment="JUSTIFY" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="230.0" />
       <DatePicker fx:id="deadline_DatePicker" layoutX="145.0" layoutY="279.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="230.0" />
       <Label layoutX="67.0" layoutY="312.0" text="Исполнитель" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="270.0" />
-      <ComboBox layoutX="145.0" layoutY="308.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="270.0" />
+      <ComboBox fx:id="assignee_ComboBox" layoutX="145.0" layoutY="308.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="145.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="270.0" />
       <Button fx:id="create_btn" layoutX="286.0" layoutY="310.0" minHeight="25.0" minWidth="80.0" mnemonicParsing="false" onAction="#createTask" prefHeight="25.0" prefWidth="80.0" text="📅 Создать" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="310.0" />
       <Button fx:id="cancel_btn" layoutX="145.0" layoutY="310.0" minHeight="25.0" minWidth="80.0" mnemonicParsing="false" onAction="#actionClose" prefHeight="25.0" prefWidth="80.0" text="Отмена" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="310.0" />
       <Label fx:id="parent_Label" layoutX="145.0" layoutY="192.0" styleClass="into_task_project-label" text="|" />

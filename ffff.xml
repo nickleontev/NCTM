@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+    <created>2019-03-14</created>
+    <description></description>
+    <project>
+        <created>2019-03-14</created>
+        <description></description>
+        <summary>уцйуйцу</summary>
+        <task>
+            <created>2019-03-14</created>
+            <description>уцйу</description>
+            <notification>
+                <date>2019-03-13</date>
+                <mode>DAILY</mode>
+                <notify>2019-03-14</notify>
+                <performed>true</performed>
+                <time>15:06</time>
+            </notification>
+            <notification>
+                <date>2018-03-14</date>
+                <mode>ANNUAL</mode>
+                <notify>2019-03-14</notify>
+                <performed>true</performed>
+                <time>15:06</time>
+            </notification>
+            <status>OPN</status>
+            <summary>уйцу</summary>
+            <updated>2019-03-14</updated>
+        </task>
+        <updated>2019-03-14</updated>
+    </project>
+    <summary>Проекты</summary>
+    <updated>2019-03-14</updated>
+</root>

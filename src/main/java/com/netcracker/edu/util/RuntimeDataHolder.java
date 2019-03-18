@@ -4,9 +4,17 @@ import com.netcracker.edu.fxmodel.Root;
 
 public class RuntimeDataHolder {
 
-    private static final Root holder = new Root();
+    public static final String PATH = "data.json";
+    private static  Root holder;
 
     public static Root getHolder() {
+        if (holder==null) holder = new Root();
         return holder;
     }
+
+    public static void setHolder(Root root) {
+        holder = root;
+    }
+
+
 }

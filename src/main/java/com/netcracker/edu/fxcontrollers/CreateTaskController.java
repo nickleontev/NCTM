@@ -1,8 +1,10 @@
 package com.netcracker.edu.fxcontrollers;
 
+import com.netcracker.edu.fxmodel.Assignee;
 import com.netcracker.edu.fxmodel.Project;
 import com.netcracker.edu.fxmodel.Root;
 import com.netcracker.edu.fxmodel.Task;
+import com.netcracker.edu.util.JsonUtil;
 import com.netcracker.edu.util.RuntimeDataHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import java.util.ResourceBundle;
 public class CreateTaskController implements Initializable
 {
     private static final Logger log = LoggerFactory.getLogger(CreateTaskController.class);
+
     private Root data = RuntimeDataHolder.getHolder();
 
     @FXML
@@ -42,41 +45,56 @@ public class CreateTaskController implements Initializable
     @FXML
     private DatePicker deadline_DatePicker;
 
-
     @FXML
     private Label parent_Label;
+
+    @FXML
+    public ComboBox assignee_ComboBox;
 
 
     private ResourceBundle resourceBundle;
 
-
-
-    public void actionClose(ActionEvent actionEvent) {
+    private void closeWindow(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+    }
 
-
+    public void actionClose(ActionEvent actionEvent) {
+        if (!summary_TextField.getText().equals("")||description_TextField.getText().length()>10) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("NCTM - Несохраненные данные");
+            alert.setHeaderText("Имеются несохраненные данные. Вы уверены, что хотите отменить добавление задачи?");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    closeWindow(actionEvent);
+                }
+                if (rs == ButtonType.CANCEL) {
+                    return;
+                }
+            });
+        }
+        else closeWindow(actionEvent);
     }
 
 
     public void createTask(ActionEvent actionEvent) {
-        if (!checkValues()){
-            return;
+        if (checkValues()){
+            Task task = new Task(summary_TextField.getText(), description_TextField.getText(), deadline_DatePicker.getValue(),data.getCurrent(), (Assignee) assignee_ComboBox.getSelectionModel().getSelectedItem());
+            data.getCurrent().addTask(task);
+         //   JsonUtil.save(data, RuntimeDataHolder.PATH);
+            closeWindow(actionEvent);
         }
-
-        Task task = new Task(summary_TextField.getText(), description_TextField.getText(), deadline_DatePicker.getValue(),data.getCurrent());
-
-        data.getCurrent().addTask(task);
-
-
-        actionClose(actionEvent);
     }
 
     private boolean checkValues() {
-        if (true){
-            //DialogManager.showInfoDialog(resourceBundle.getString("error"), resourceBundle.getString("fill_field"));
-            return true;
+        if (summary_TextField.getText().equals("")) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("NCTM - Добаваление задачи");
+            alert.setHeaderText("Необходимо указать название задачи!");
+            alert.showAndWait().ifPresent(rs -> {
+            });
+            return false;
         }
 
         return true;
@@ -87,7 +105,8 @@ public class CreateTaskController implements Initializable
 
         this.resourceBundle = resources;
         parent_Label.setText(data.getCurrent().getSummary());
-
+        assignee_ComboBox.setItems(data.getAssignees());
+        assignee_ComboBox.getSelectionModel().select(0);
     }
 
     public  void update(){
