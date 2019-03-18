@@ -22,10 +22,7 @@ public class MainApp extends Application {
 
     public static final String PATH = "data.json";
     private Root data = RuntimeDataHolder.getHolder();
-
-    private static final Logger log = LoggerFactory.getLogger(MainApp.class);
-
-
+    private static final Logger log = LoggerFacto
     public static void main(String[] args) throws Exception {
         launch(args);
     }
